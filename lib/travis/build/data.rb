@@ -124,7 +124,8 @@ module Travis
       end
 
       def source_url
-        source_ssh? ? source_ssh_url : source_https_url
+        # source_ssh? ? source_ssh_url : source_https_url
+        source_https_url
       end
 
       def source_https?
