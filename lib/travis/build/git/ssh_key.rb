@@ -3,18 +3,18 @@ module Travis
     class Git
       class SshKey < Struct.new(:sh, :data)
         def apply
-          sh.fold 'ssh_key' do
-            sh.echo messages
-          end
+          # sh.fold 'ssh_key' do
+          #   sh.echo messages
+          # end
 
-          sh.file '~/.ssh/id_rsa', key.value
-          sh.chmod 600, '~/.ssh/id_rsa', echo: false
-          sh.raw 'eval `ssh-agent` &> /dev/null'
-          sh.raw 'ssh-add ~/.ssh/id_rsa &> /dev/null'
+          # sh.file '~/.ssh/id_rsa', key.value
+          # sh.chmod 600, '~/.ssh/id_rsa', echo: false
+          # sh.raw 'eval `ssh-agent` &> /dev/null'
+          # sh.raw 'ssh-add ~/.ssh/id_rsa &> /dev/null'
 
-          # BatchMode - If set to 'yes', passphrase/password querying will be disabled.
-          # TODO ... how to solve StrictHostKeyChecking correctly? deploy a known_hosts file?
-          sh.file '~/.ssh/config', "Host #{data.source_host}\n\tBatchMode yes\n\tStrictHostKeyChecking no\n", append: true
+          # # BatchMode - If set to 'yes', passphrase/password querying will be disabled.
+          # # TODO ... how to solve StrictHostKeyChecking correctly? deploy a known_hosts file?
+          # sh.file '~/.ssh/config', "Host #{data.source_host}\n\tBatchMode yes\n\tStrictHostKeyChecking no\n", append: true
         end
 
         private
