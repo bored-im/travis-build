@@ -14,7 +14,7 @@ module Travis
         def setup
           super
           sh.if "! -f #{activate_file}" do
-            install_erlang otp_release
+            # install_erlang otp_release
           end
           sh.cmd "source #{activate_file}"
         end
