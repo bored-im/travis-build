@@ -13,38 +13,38 @@ module Travis
 
         def setup
           super
-          sh.if "! -f #{activate_file}" do
-            # install_erlang otp_release
-          end
-          sh.cmd "source #{activate_file}"
+          # sh.if "! -f #{activate_file}" do
+          #   install_erlang otp_release
+          # end
+          # sh.cmd "source #{activate_file}"
         end
 
         def install
-          sh.if "#{rebar_configured} && -f ./rebar" do
-            sh.cmd './rebar get-deps', fold: 'install', retry: true
-          end
-          sh.elif rebar_configured do
-            sh.if "-z $(command -v rebar3)" do
-              sh.cmd 'rebar get-deps', fold: 'install', retry: true
-            end
-          end
+          # sh.if "#{rebar_configured} && -f ./rebar" do
+          #   sh.cmd './rebar get-deps', fold: 'install', retry: true
+          # end
+          # sh.elif rebar_configured do
+          #   sh.if "-z $(command -v rebar3)" do
+          #     sh.cmd 'rebar get-deps', fold: 'install', retry: true
+          #   end
+          # end
         end
 
         def script
-          sh.if "#{rebar_configured} && -f ./rebar" do
-            sh.cmd './rebar compile && ./rebar skip_deps=true eunit'
-          end
-          sh.elif rebar_configured do
-            sh.if "-n $(command -v rebar3)" do
-              sh.cmd 'rebar3 eunit'
-            end
-            sh.else do
-              sh.cmd 'rebar compile && rebar skip_deps=true eunit'
-            end
-          end
-          sh.else do
-            sh.cmd 'make test'
-          end
+          # sh.if "#{rebar_configured} && -f ./rebar" do
+          #   sh.cmd './rebar compile && ./rebar skip_deps=true eunit'
+          # end
+          # sh.elif rebar_configured do
+          #   sh.if "-n $(command -v rebar3)" do
+          #     sh.cmd 'rebar3 eunit'
+          #   end
+          #   sh.else do
+          #     sh.cmd 'rebar compile && rebar skip_deps=true eunit'
+          #   end
+          # end
+          # sh.else do
+          #   sh.cmd 'make test'
+          # end
         end
 
         def cache_slug
