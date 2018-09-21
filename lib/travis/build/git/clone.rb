@@ -18,6 +18,7 @@ module Travis
         private
 
           def clone_or_fetch
+            sh.cmd "rm -rf #{dir}"
             sh.if "! -d #{dir}/.git" do
               if sparse_checkout
                 sh.echo "Cloning with sparse checkout specified with #{sparse_checkout}", ansi: :yellow
